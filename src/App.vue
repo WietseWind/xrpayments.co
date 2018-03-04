@@ -2,9 +2,13 @@
   <div id="app">
     <main role="main">
       <div class="d-flex justify-content-between flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
-        <router-link tag="h5" class="my-0 p-6 mr-md-auto font-weight-normal logo" to="/">
+        <router-link tag="h6" class="my-0 p-6 mr-md-auto font-weight-normal logo" to="/">
           XRP Payment
         </router-link>
+        <nav class="my-2 my-md-0 mr-md-3">
+          <router-link v-if="!awaitingPayment" to="/about" class="p-2 routerlink btn" active-class="btn btn-outline-primary"><i class="fa fa-info-circle"></i> About</router-link>
+          <button :disabled="awaitingPayment" v-if="awaitingPayment" to="/about" class="p-2 btn btn-outline-secondary noborder"><i class="fa fa-info-circle"></i> About</button>
+        </nav>
         <nav class="my-2 my-md-0 mr-md-3">
           <router-link v-if="!awaitingPayment" to="/settings" class="p-2 routerlink btn" active-class="btn btn-outline-primary"><i class="fa fa-cog"></i> Settings</router-link>
           <button :disabled="awaitingPayment" v-if="awaitingPayment" to="/settings" class="p-2 btn btn-outline-secondary noborder"><i class="fa fa-cog"></i> Settings</button>
