@@ -24,7 +24,7 @@
         </small>
         <br />
         <small>
-          <span class="text-muted">XRP Payments on your website? <a href="https://zapster.io/" target="_blank">zapster.io</a></span>
+          <span class="text-muted">XRP Payments on your website? <a href="https://zapster.io/" target="_blank" class="text-muted">zapster.io</a></span>
         </small>
       </div>
     </footer>
