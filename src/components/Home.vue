@@ -186,7 +186,7 @@ export default {
   },
   methods: {
     fetchExchangeRate () {
-      if (this.exchange && this.exchange !== null && this.exchange !== '') {
+      if (!this.waitForPayment && this.exchange && this.exchange !== null && this.exchange !== '') {
         fetch(this.exchange).then((r) => {
           return r.json()
         }).then((r) => {
