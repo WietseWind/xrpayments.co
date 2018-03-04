@@ -20,6 +20,8 @@
         <small>
           <span class="text-muted">By <a href="https://twitter.com/WietseWind" target="_blank">@WietseWind</a></span>
           -
+          <router-link to="/donate"><b>Donate</b></router-link>
+          -
           <a href="https://github.com/WietseWind/xrpayments.co" target="_blank"><i class="fa fa-github"></i> Source</a>
         </small>
         <br />
