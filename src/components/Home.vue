@@ -68,12 +68,15 @@
 
       <div class="text-center card">
         <div class="card-body">
-          <QrCode :value="'https://ripple.com//send?to=' +  activeWallet+ '&amount=' + convertedAmount.xrp" :options="{ size: 225 }"></QrCode>
+          <QrCode :value="'https://ripple.com//send?to=' +  activeWallet+ '&amount=' + convertedAmount.xrp + (dtag.use ? '&dt=' + dtag.next : '')" :options="{ size: 225 }"></QrCode>
           <br />
-          <code class="text-muted">{{ activeWallet }}</code>
+          <code class="text-muted">
+            {{ activeWallet }}
+            <span v-if="dtag.use" class="text-warning"><i class="fa fa-tag"></i> {{ dtag.next }}</span>
+          </code>
         </div>
         <div class="card-footer">
-          <b>Scan this code to pay: <code class="text-primary">{{ convertedAmount.xrp }} XRP</code></b>
+          <b>Scan this code to pay <code class="text-primary">{{ convertedAmount.xrp }} XRP</code></b>
         </div>
       </div>
       <div class="text-center text-muted">
@@ -117,7 +120,11 @@ export default {
       amount: null,
       useCurrency: 'XRP',
       rate: 0,
-      waitForPayment: false
+      waitForPayment: false,
+      dtag: {
+        use: false,
+        next: 0
+      }
     }
   },
   computed: {
@@ -165,6 +172,10 @@ export default {
   watch: {
     waitForPayment (a) {
       this.$parent.awaitingPayment = a
+      if (this.dtag.use && !a) {
+        this.dtag.next++
+        this.$setItem('dtag', this.dtag)
+      }
     },
     activeWallet (a) {
       this.$setItem('activewallet', a)
@@ -244,6 +255,12 @@ export default {
           this.useCurrency = r
         }
       })
+    })
+    this.$getItem('dtag').then((r) => {
+      if (r !== null) {
+        this.dtag.use = r.use
+        this.dtag.next = r.next
+      }
     })
   }
 }

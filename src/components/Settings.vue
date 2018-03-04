@@ -5,7 +5,7 @@
     <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
     <!-- <a href="#" class="card-link">Card link</a> -->
     <!-- <a href="#" class="card-link">Another link</a> -->
-    <div class="text-center alert alert-danger" v-if="wallets && wallets.length < 1">
+    <div class="text-center alert alert-danger" v-if="!wallets || wallets.length < 1">
       No wallets configured
     </div>
     <div v-if="wallets && wallets.length > 0">
@@ -28,8 +28,19 @@
     </select>
 
     <br />
-    <hr />
-    <router-link to="/" class="btn btn-lg btn-block btn-primary"><i class="fa fa-home"></i> Home</router-link>
+    <h2 class="">Destination Tag</h2>
+    <p>Auto-increment a destination tag for each payment, so you can note the generated destination tag on a receipt / bill.</p>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <button @click="dtag.use = false" class="btn" :class="{ 'btn-primary': !dtag.use, 'btn-outline-primary' : dtag.use }">Disable</button>
+        <button @click="dtag.use = true" class="btn" :class="{ 'btn-primary': dtag.use, 'btn-outline-primary' : !dtag.use }">Enable</button>
+      </div>
+      <input :disabled="!dtag.use" type="number" min="0" max="2147483646" step="1" class="text-right form-control form-control-sm" placeholder="The next destination tag (integers)" v-model="dtag.next">
+    </div>
+
+    <br />
+    <br />
+    <router-link to="/" class="btn btn-block btn-outline-primary"><i class="fa fa-home"></i> Home</router-link>
   </div>
 </template>
 
@@ -45,7 +56,11 @@ export default {
         { index: 'JPY', uri: 'https://data.ripple.com/v2/exchange_rates/JPY+rB3gZey7VWHYRqJHLoHDEJXJ2pEPNieKiS/xrp', title: 'Japan Yen' }
       ],
       wallets: null,
-      exchange: ''
+      exchange: '',
+      dtag: {
+        use: false,
+        next: 10000
+      }
     }
   },
   watch: {
@@ -53,6 +68,12 @@ export default {
       this.$setItem('exchangerate', this.exchangePairs.filter((s) => {
         return s.index === e
       })[0].uri)
+    },
+    'dtag.use' () {
+      this.$setItem('dtag', this.dtag)
+    },
+    'dtag.next' () {
+      this.$setItem('dtag', this.dtag)
     }
   },
   methods: {
@@ -75,6 +96,12 @@ export default {
         this.exchange = this.exchangePairs.filter((s) => {
           return s.uri === r
         })[0].index
+      }
+    })
+    this.$getItem('dtag').then((r) => {
+      if (r !== null) {
+        this.dtag.use = r.use
+        this.dtag.next = r.next
       }
     })
   }
