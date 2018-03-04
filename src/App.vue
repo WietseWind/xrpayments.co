@@ -19,7 +19,11 @@
       <div class="container text-center">
         <small>
           <span class="text-muted">By <a href="https://twitter.com/WietseWind" target="_blank">@WietseWind</a></span>
-          &dash;
+          -
+          <a href="https://github.com/WietseWind/xrpayments.co" target="_blank"><i class="fa fa-github"></i> Source</a>
+        </small>
+        <br />
+        <small>
           <span class="text-muted">XRP Payments on your website? <a href="https://zapster.io/" target="_blank">zapster.io</a></span>
         </small>
       </div>
@@ -106,7 +110,8 @@ body {
   width: 100%;
   height: 60px; /* Set the fixed height of the footer here */
   overflow: hidden;
-  line-height: 60px; /* Vertically center the text there */
+  padding-top: 14px;
+  line-height: 15px; /* Vertically center the text there */
   background-color: #f5f5f5;
 }
 
