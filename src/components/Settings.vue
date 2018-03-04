@@ -41,6 +41,7 @@
     <br />
     <br />
     <router-link to="/" class="btn btn-block btn-outline-primary"><i class="fa fa-home"></i> Home</router-link>
+    <br />&nbsp;
   </div>
 </template>
 
