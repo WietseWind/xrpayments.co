@@ -1,6 +1,8 @@
 <template>
   <div class="hello">
     <div v-if="!waitForPayment">
+      <router-link to="/about" class="btn btn-sm btn-block btn-outline-secondary"><i class="fa fa-info"></i> Learn more about this tool</router-link>
+      <br />
       <h2 class="text-center">Create payment QR</h2>
 
       <div v-if="wallets && wallets.length > 0">
