@@ -61,6 +61,7 @@ export default {
         { index: 'CAD', uri: 'https://data.ripple.com/v2/exchange_rates/EUR+rhub8VRN55s94qWKDv6jmDy1pUykJzF3wq/xrp#https://cors-anywhere.herokuapp.com/https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml#CAD', title: 'Canadian Dollar' },
         { index: 'KRW', uri: 'https://data.ripple.com/v2/exchange_rates/EUR+rhub8VRN55s94qWKDv6jmDy1pUykJzF3wq/xrp#https://cors-anywhere.herokuapp.com/https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml#KRW', title: 'South Korean Won' },
         { index: 'NZD', uri: 'https://data.ripple.com/v2/exchange_rates/EUR+rhub8VRN55s94qWKDv6jmDy1pUykJzF3wq/xrp#https://cors-anywhere.herokuapp.com/https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml#NZD', title: 'New Zealand Dollar' },
+        { index: 'ZAR', uri: 'https://data.ripple.com/v2/exchange_rates/EUR+rhub8VRN55s94qWKDv6jmDy1pUykJzF3wq/xrp#https://cors-anywhere.herokuapp.com/https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml#ZAR', title: 'South African Rand' },
         { index: 'CHF', uri: 'https://data.ripple.com/v2/exchange_rates/EUR+rhub8VRN55s94qWKDv6jmDy1pUykJzF3wq/xrp#https://cors-anywhere.herokuapp.com/https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml#CHF', title: 'Swiss Franc' },
         { index: 'CNY', uri: 'https://data.ripple.com/v2/exchange_rates/CNY+razqQKzJRdB4UxFPWf5NEpEG3WMkmwgcXA/xrp', title: 'Chinese Yuan Renminbi' },
         { index: 'JPY', uri: 'https://data.ripple.com/v2/exchange_rates/JPY+rB3gZey7VWHYRqJHLoHDEJXJ2pEPNieKiS/xrp', title: 'Japan Yen' }
