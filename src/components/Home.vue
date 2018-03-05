@@ -130,8 +130,13 @@ export default {
   computed: {
     currency () {
       if (this.exchange && this.exchange !== null) {
-        var cMatch = this.exchange.match(/([A-Z]{3})\+/)
-        if (cMatch) return cMatch[1]
+        if (this.exchange.match(/#/)) {
+          var dualConvert = this.exchange.split('#')
+          if (dualConvert[2]) return dualConvert[2]
+        } else {
+          var cMatch = this.exchange.match(/([A-Z]{3})\+/)
+          if (cMatch) return cMatch[1]
+        }
       }
       return ''
     },
@@ -187,13 +192,38 @@ export default {
   methods: {
     fetchExchangeRate () {
       if (!this.waitForPayment && this.exchange && this.exchange !== null && this.exchange !== '') {
-        fetch(this.exchange).then((r) => {
+        var url = this.exchange
+        var followupUrl = ''
+        var followupCurrency = ''
+        if (url.match(/#/)) {
+          followupUrl = url.split('#')[1]
+          followupCurrency = url.split('#')[2]
+          url = url.split('#')[0]
+        }
+        fetch(url).then((r) => {
           return r.json()
         }).then((r) => {
           var newRate = parseFloat(r.rate)
           if (this.rate !== newRate) {
-            console.log('Update rate, old / new', this.rate, newRate)
-            this.rate = newRate
+            if (followupUrl !== '') {
+              fetch(followupUrl).then((f) => {
+                return f.text()
+              }).then((f) => {
+                var currencyMatch = new RegExp(followupCurrency + '.+rate=.*?([0-9\\.]+)')
+                var reMatch = currencyMatch.exec(f)
+                if (reMatch) {
+                  var currencyRate = parseFloat(reMatch[1])
+                  if (!isNaN(currencyRate)) {
+                    var calcedRate = newRate / currencyRate
+                    console.log('Update rate, old / new', this.rate, newRate, currencyRate, calcedRate)
+                    this.rate = calcedRate
+                  }
+                }
+              })
+            } else {
+              console.log('Update rate, old / new', this.rate, newRate)
+              this.rate = newRate
+            }
           }
         }).catch(console.error)
       }
@@ -267,7 +297,7 @@ export default {
     this.$getItem('exchangerate').then((r) => {
       this.exchange = r
       that.fetchExchangeRate()
-      setInterval(that.fetchExchangeRate, 5000)
+      setInterval(that.fetchExchangeRate, 30 * 1000)
       this.$getItem('usecurrency').then((r) => {
         if (r === this.currency) {
           this.useCurrency = r

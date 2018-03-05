@@ -53,6 +53,10 @@ export default {
       exchangePairs: [
         { index: 'EUR', uri: 'https://data.ripple.com/v2/exchange_rates/EUR+rhub8VRN55s94qWKDv6jmDy1pUykJzF3wq/xrp', title: 'European Euro' },
         { index: 'USD', uri: 'https://data.ripple.com/v2/exchange_rates/USD+rvYAfWj5gh67oV6fW32ZzP3Aw4Eubs59B/xrp', title: 'United States Dollar' },
+        { index: 'GBP', uri: 'https://data.ripple.com/v2/exchange_rates/EUR+rhub8VRN55s94qWKDv6jmDy1pUykJzF3wq/xrp#https://cors-anywhere.herokuapp.com/https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml#GBP', title: 'Great British Pound' },
+        { index: 'SEK', uri: 'https://data.ripple.com/v2/exchange_rates/EUR+rhub8VRN55s94qWKDv6jmDy1pUykJzF3wq/xrp#https://cors-anywhere.herokuapp.com/https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml#SEK', title: 'Swedish Krona' },
+        { index: 'CAD', uri: 'https://data.ripple.com/v2/exchange_rates/EUR+rhub8VRN55s94qWKDv6jmDy1pUykJzF3wq/xrp#https://cors-anywhere.herokuapp.com/https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml#CAD', title: 'Canadian Dollar' },
+        { index: 'KRW', uri: 'https://data.ripple.com/v2/exchange_rates/EUR+rhub8VRN55s94qWKDv6jmDy1pUykJzF3wq/xrp#https://cors-anywhere.herokuapp.com/https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml#KRW', title: 'South Korean Won' },
         { index: 'CNY', uri: 'https://data.ripple.com/v2/exchange_rates/CNY+razqQKzJRdB4UxFPWf5NEpEG3WMkmwgcXA/xrp', title: 'Chinese Yuan Renminbi' },
         { index: 'JPY', uri: 'https://data.ripple.com/v2/exchange_rates/JPY+rB3gZey7VWHYRqJHLoHDEJXJ2pEPNieKiS/xrp', title: 'Japan Yen' }
       ],
