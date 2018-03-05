@@ -203,10 +203,10 @@ export default {
     var that = this
 
     window.rippleConnectionPool.on('tx', function (tx) {
-      if (tx.message.transaction.TransactionType === 'Payment' && tx.message.validated && tx.message.engine_result === 'tesSUCCESS') {
+      if (tx.message.transaction.TransactionType === 'Payment' && tx.message.validated && tx.message.engine_result === 'tesSUCCESS' && tx.message.transaction.Amount) {
         var amount = parseFloat(tx.message.transaction.Amount) / 1000 / 1000
         if (that.waitForPayment) {
-          if (tx.message.transaction.Destination === that.activeWallet) {
+          if (!isNaN(amount) && tx.message.transaction.Destination === that.activeWallet) {
             var msgDiv = document.createElement('div')
             msgDiv.className = 'text-center'
             if (that.convertedAmount.xrp === amount) {
