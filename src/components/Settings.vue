@@ -67,6 +67,7 @@ export default {
         { index: 'CHF', uri: 'https://data.ripple.com/v2/exchange_rates/EUR+rhub8VRN55s94qWKDv6jmDy1pUykJzF3wq/xrp#https://cors-anywhere.herokuapp.com/https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml#CHF', title: 'Swiss Franc' },
         { index: 'AUD', uri: 'https://data.ripple.com/v2/exchange_rates/EUR+rhub8VRN55s94qWKDv6jmDy1pUykJzF3wq/xrp#https://cors-anywhere.herokuapp.com/https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml#AUD', title: 'Australian Dollar' },
         { index: 'RON', uri: 'https://data.ripple.com/v2/exchange_rates/EUR+rhub8VRN55s94qWKDv6jmDy1pUykJzF3wq/xrp#https://cors-anywhere.herokuapp.com/https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml#RON', title: 'Romanian Leu' },
+        { index: 'MXN', uri: 'https://data.ripple.com/v2/exchange_rates/EUR+rhub8VRN55s94qWKDv6jmDy1pUykJzF3wq/xrp#https://cors-anywhere.herokuapp.com/https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml#MXN', title: 'Mexican Peso' },
         { index: 'CNY', uri: 'https://data.ripple.com/v2/exchange_rates/CNY+razqQKzJRdB4UxFPWf5NEpEG3WMkmwgcXA/xrp', title: 'Chinese Yuan Renminbi' },
         { index: 'JPY', uri: 'https://data.ripple.com/v2/exchange_rates/JPY+rB3gZey7VWHYRqJHLoHDEJXJ2pEPNieKiS/xrp', title: 'Japan Yen' }
       ],
