@@ -234,43 +234,62 @@ export default {
 
     window.rippleConnectionPool.on('tx', function (tx) {
       if (tx.message.transaction.TransactionType === 'Payment' && tx.message.validated && tx.message.engine_result === 'tesSUCCESS' && tx.message.transaction.Amount) {
-        var amount = parseFloat(tx.message.transaction.Amount) / 1000 / 1000
-        if (that.waitForPayment) {
-          if (!isNaN(amount) && tx.message.transaction.Destination === that.activeWallet) {
-            var msgDiv = document.createElement('div')
-            msgDiv.className = 'text-center'
-            if (that.convertedAmount.xrp === amount) {
-              var dtagWarning = ''
-              if (that.dtag.use) {
-                if (!tx.message.transaction.DestinationTag) {
-                  dtagWarning = 'without destination tag (requested <i class="fa fa-tag"></i> ' + that.dtag.next + ')'
-                } else {
-                  if (parseInt(tx.message.transaction.DestinationTag) !== that.dtag.next) {
-                    dtagWarning = 'with a different destination tag (requested <i class="fa fa-tag"></i> ' + that.dtag.next + ', received <i class="fa fa-tag"></i> ' + tx.message.transaction.DestinationTag + ')'
+        // console.log(tx)
+
+        var amount = tx.message.transaction.Amount
+        if (tx.message.meta && typeof tx.message.meta.delivered_amount !== 'undefined') {
+          amount = tx.message.meta.delivered_amount
+        }
+        if (tx.message.meta && typeof tx.message.meta.DeliveredAmount !== 'undefined') {
+          amount = tx.message.meta.DeliveredAmount
+        }
+
+        var msgDiv = document.createElement('div')
+        if (typeof amount === 'string') {
+          amount = parseFloat(amount) / 1000 / 1000
+
+          if (that.waitForPayment) {
+            if (!isNaN(amount) && tx.message.transaction.Destination === that.activeWallet) {
+              msgDiv.className = 'text-center'
+              if (that.convertedAmount.xrp === amount) {
+                var dtagWarning = ''
+                if (that.dtag.use) {
+                  if (!tx.message.transaction.DestinationTag) {
+                    dtagWarning = 'without destination tag (requested <i class="fa fa-tag"></i> ' + that.dtag.next + ')'
+                  } else {
+                    if (parseInt(tx.message.transaction.DestinationTag) !== that.dtag.next) {
+                      dtagWarning = 'with a different destination tag (requested <i class="fa fa-tag"></i> ' + that.dtag.next + ', received <i class="fa fa-tag"></i> ' + tx.message.transaction.DestinationTag + ')'
+                    }
                   }
                 }
-              }
-              if (dtagWarning === '') {
-                msgDiv.innerHTML = '<b>' + amount.toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 6 }) + ' XRP</b> received from <code class="text-primary">' + tx.message.transaction.Account + '</code>'
-                swal({ title: 'Received payment', icon: 'success', content: msgDiv }).then(() => {
-                  that.waitForPayment = false
-                  that.amount = null
-                })
+                if (dtagWarning === '') {
+                  msgDiv.innerHTML = '<b>' + amount.toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 6 }) + ' XRP</b> received from <code class="text-primary">' + tx.message.transaction.Account + '</code>'
+                  swal({ title: 'Received payment', icon: 'success', content: msgDiv }).then(() => {
+                    that.waitForPayment = false
+                    that.amount = null
+                  })
+                } else {
+                  msgDiv.innerHTML = '<b>' + amount.toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 6 }) + ' XRP</b> received, but <b>' + dtagWarning + '</b> from <code class="text-primary">' + tx.message.transaction.Account + '</code>'
+                  swal({ title: 'Received payment', icon: 'warning', content: msgDiv }).then(() => {
+                    that.waitForPayment = false
+                    that.amount = null
+                  })
+                }
               } else {
-                msgDiv.innerHTML = '<b>' + amount.toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 6 }) + ' XRP</b> received, but <b>' + dtagWarning + '</b> from <code class="text-primary">' + tx.message.transaction.Account + '</code>'
-                swal({ title: 'Received payment', icon: 'warning', content: msgDiv }).then(() => {
+                msgDiv.innerHTML = '<b>' + amount.toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 6 }) + ' XRP</b> received (<b class="text-danger">' + that.convertedAmount.xrp.toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 6 }) + ' XRP requested</b>) from <code class="text-primary">' + tx.message.transaction.Account + '</code>'
+                swal({ title: 'Warning!', icon: 'error', content: msgDiv }).then(() => {
                   that.waitForPayment = false
                   that.amount = null
                 })
               }
-            } else {
-              msgDiv.innerHTML = '<b>' + amount.toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 6 }) + ' XRP</b> received (<b class="text-danger">' + that.convertedAmount.xrp.toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 6 }) + ' XRP requested</b>) from <code class="text-primary">' + tx.message.transaction.Account + '</code>'
-              swal({ title: 'Warning!', icon: 'error', content: msgDiv }).then(() => {
-                that.waitForPayment = false
-                that.amount = null
-              })
             }
           }
+        } else {
+          msgDiv.innerHTML = '<b>Non-XRP amount received; ' + amount.value.toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 6 }) + ' ' + amount.currency + '</b> received from <code class="text-primary">' + tx.message.transaction.Account + '</code>'
+          swal({ title: 'Received non-XRP payment', icon: 'warning', content: msgDiv }).then(() => {
+            that.waitForPayment = false
+            that.amount = null
+          })
         }
       }
     })
