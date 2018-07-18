@@ -148,11 +148,12 @@ body {
   cursor: pointer;
   span {
     font-family: 'r1ppled';
-    font-size: 5.5em;
+    font-size: 5.5rem;
     display: block;
     position: absolute;
     left: -25px;
-    top: -0.41em;
+    line-height: 0rem;
+    margin-top: -0.7rem;
   }
   &:hover {
     text-decoration: none;
