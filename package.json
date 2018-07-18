@@ -14,6 +14,7 @@
     "@xkeshi/vue-qrcode": "^0.3.0",
     "localforage": "^1.6.0",
     "node-sass": "^4.7.2",
+    "ripple-lib": "^1.0.0-beta.3",
     "ripple-lib-connection-pool": "^0.1.2",
     "sass-loader": "^6.0.7",
     "sweetalert": "^2.1.0",
