@@ -45,7 +45,7 @@ localforage.config({ name: 'xrprequest' })
 let Pool
 
 if (typeof window.rippleConnectionPool === 'undefined') {
-  Pool = new ConnectionPool([ 'wss://kyte.peerisland.com', 'wss://s1.ripple.com', 'wss://s2.ripple.com' ])
+  Pool = new ConnectionPool([ 'wss://fh.xrpl.ws', 'wss://s1.ripple.com' ])
   window.rippleConnectionPool = Pool
 } else {
   Pool = window.rippleConnectionPool
