@@ -13,7 +13,7 @@
   "dependencies": {
     "@xkeshi/vue-qrcode": "^0.3.0",
     "localforage": "^1.7.3",
-    "node-sass": "^4.13.0",
+    "node-sass": "^7.0.0",
     "ripple-lib": "^1.4.1",
     "ripple-lib-connection-pool": "^0.1.4",
     "sass-loader": "^6.0.7",
